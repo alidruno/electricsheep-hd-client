@@ -3,61 +3,65 @@
 [Wikipedia](https://en.wikipedia.org/wiki/Electric_sheep):
 `Electric Sheep is a distributed computing project for animating and evolving fractal flames, which are in turn distributed to the networked computers`
 
-Originally designed by http://www.electricsheep.org/ but rendered at low resolutions i am trying to bring the sheeps to the next generation of computer displays.
-This is the early alpha of a client for an electric sheep ecosystem which renders frames in HD ( e.g. 720p, 1080p, 4k, 8k).
-For a good example of what electric sheeps are see [this youtube video](https://www.youtube.com/watch?v=KeNORUW4OGs)
+Originally designed by pioneer [Scott Draves](https://github.com/scottdraves/electricsheep.git) and presented on [website](http://www.electricsheep.org/), rendering runs with resolutions from last century.
+Hosted by and thanks to [kochd's codes,](https://github.com/kochd/electricsheep-hd-client/master/) are actual electric dreaming sheeps further fulfilled with
+HighDef' graphical participactive works ran by 'electricsheep-hd-client' daemons, synchronized all together to generate new High-Definition electric sheep dreams frames.
+(fitting HD displays standards up to 720p, 1080p, 4k, 8k)
+For a good illustration of electric sheeps, you might look at [this youtube video](https://www.youtube.com/watch?v=KeNORUW4OGs)
 
 ## Road map
-- ~~Currently there is no front end where you can see the overall rendering process by the community.~~
-- ~~GPU rendering with CUDA is planned but this need more investigation~~ (Currently an experimental implementation exists)
-- ~~Voting system for flames~~
-- Handle replacement of bad flames when they are already rendered
-- ~~Submit system for new flames~~
-- Non linear mutation paths
+- not established in this fork.
 
-## Getting started
-### Debian / Ubuntu / ...
+### Getting started
+
+## To run it on [Debian-based](https://github.com/alidruno/electricsheep-hd-client/blob/master/README.md#debian--ubuntu--) distributions
+#  as Ubuntu (which is mostely ran on my side)...
+it is done with this command-lines:
+
 <pre>
-git clone https://github.com/kochd/electricsheep-hd-client.git && cd electricsheep-hd-client
-apt-get install flam3 ruby bundler
+git clone https://github.com/alidruno/electricsheep-hd-client.git && cd electricsheep-hd-client
+sudo apt-get install flam3-utils flam3-palette libflam3-0 ruby3.0 bundler -y
 bundle install
 ./daemon
 </pre>
 
-If this results in `./daemon.rb:29:in <main>': You will need an api key. Please register at https://sheeps.triple6.org:9999/register (RuntimeError)` continue with [registration](https://github.com/kochd/electricsheep-hd-client#registration).
+### For other Linux / Unix / Posix system users,
+you should try successfully with usual methods and relate-back their experiences through welcomed contributions what might enhance the discovery of this project as they should climb up back to original code writers having made it ready and free to share.
 
-### Other Linux / Unix / Posix systems
-Currently i do not know. Adept from [Debian / Ubuntu](https://github.com/kochd/electricsheep-hd-client/blob/master/README.md#debian--ubuntu--) and contribute back so others can learn from your wisdom.
-
-### Windows
-Download an install the [latest release](https://github.com/kochd/electricsheep-hd-client/releases/latest) and follow the steps for your registration to get your apikey.
-
-If you want the latest development version Install using the installer and replace every existing file in the installation folder with the content of the [latest master](https://github.com/kochd/electricsheep-hd-client/archive/master.zip). This usually isn't needed as we package a new installer whenever this should be the case.
+If message  `./daemon.rb:29:in <main>': You will need an api key. Please register at https://sheeps.triple6.org:9999/register (RuntimeError)`  is displayed,
+everything invites you to [register](https://sheeps.triple6.org:9999/register) on this page.
 
 
-## Registration
-Register [here](https://sheeps.triple6.org/register) and follow the instructions in the email.
-The certificated is self-signed. You should be fine ignoring the warning and process to the page.
+### With Windows,
+Just download and run the [latest release](https://github.com/alidruno/electricsheep-hd-client/releases/latest) installer and follow the registration steps to get your apikey.
+If you want the latest development version, use the same installer file and replace every existing file in the installation folder with the content of the [latest master](https://github.com/alidruno/electricsheep-hd-client/archive/master.zip). This usually isn't needed as new installers are packaged at same time.
 
-## Usage
+### Registration
+Is taking place on this [page](https://sheeps.triple6.org/register), then, follow the instructions received by email.
+
+### Warning because
+Website's SSL certificate is self-signed and shouldn't, regardless the warning, put you at risk nor prevent you getting the needed api.key.
+
+### Man electricsheep-hd-client
 <pre>
 Usage: daemon [OPTIONS]
-        --server SERVER              Control server to connect to
-        --apikey APIKEY              Your api key - Default: read from ./api.key file
-        --nd, --no-download          Do not download movies
-        --np, --no-progress          Hide progress and ETA - This will speed up rendering a bit
-    -k, --keep-frames                Do not delete rendered frames after upload
-        --nice NICENESS              Niceness (Higher values result in lower process priority (default: 19, max: 19))
+        --apikey APIKEY              Your api key is read by default from ./api.key file
+        --debug                      Debug-mode
         --gpu                        Use GPU renderer (Fractorium - http://fractorium.com/)
         --gpu-devices [Device-Ids]   Use device(s) with given ids e.g.: '2,3'. Use --gpu-list-devices to get a list of your available devices.
         --gpu-list-devices           Returns a list of your installed OpenCL devices
         --gpu-priority               Set GPU render priority (1: lowest, 99: highest)
+        --help                       Shows you this updated man page
         --insecure                   Ignore ssl certificate errors
-        --debug                      Debug-mode
+    -k, --keep-frames                Do not delete rendered frames after upload
+        --nd, --no-download          Will let the daemon render without asking for new movies
+        --np, --no-progress          Without shown progress and ETA to compute, a bit more goes to rendering
+        --nice NICENESS              Niceness (Higher values result in lower process priority (default: 19, min:-20, max: 19))
+        --server SERVER              Control server to connect to
 </pre>
-(This list might be outdated. See the 'real' --help of the daemon)
+(This list might be outdated. Use --help option to check which are really available)
 
-Once your daemon is rendering frames you will gain so called credits for every frame you have rendered. Your daemon will then start to "buy" completed sequences using your gained credits and download them to `$BASE_DIR/branches/$CURRENT_BRANCH/movies`. Currently you will only get short sequences of 5 seconds which can be played by the play script.
+Once your daemon is rendering frames, you will earn so called credits for every rendered frames. Your daemon will then start to exchange them, harvesting answered electricsheep-hd videos sequences (if  --no-download  option is not set). Downloaded movies are stored in `$BASE_DIR/branches/$CURRENT_BRANCH/movies` directory. Currently you will only get ~5 seconds long sequences allowing the play script to display them immediately.
 
 ## Play
 Just run
@@ -65,13 +69,13 @@ Just run
 ./play
 </pre>
 
-This should read your earned movies of the current season and then play them using mpv (https://mpv.io). mpv is also available as apt package and included in the windows installer.
+This should read your accumulated movies from the current season to play them using mpv (https://mpv.io). mpv is also available as apt package and included in the windows installer.
 
 ## Setups
-Take a look at the README's in [setups](https://github.com/kochd/electricsheep-hd-client/tree/master/setups) for advanced setups
+Have a look at the README's in [setups](https://github.com/alidruno/electricsheep-hd-client/tree/master/setups) to find pretty huge and well prepared advanced setups, fitting your client in very easy-going few steps up to the best integration.
 
-## Questions?
+## More information can be found on following links
 - [FAQ](https://sheeps.triple6.org/faq)
 - [Wiki](https://github.com/kochd/electricsheep-hd-client/wiki/Season)
-- [IRC Chat](https://kiwiirc.com/nextclient/irc.freenode.net/?nick=guest&theme=nightwatch#electricsheephd)
-- [Feel free to submit any question](https://github.com/kochd/electricsheep-hd-client/issues/new?labels=question)
+- [Feel free to submit any questions to the honorific source teams](https://github.com/kochd/electricsheep-hd-client/issues/new?labels=question)
+- I am surely not able to make better answer as them.
