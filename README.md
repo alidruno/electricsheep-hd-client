@@ -7,15 +7,13 @@ Originally designed by pioneer [Scott Draves](https://github.com/scottdraves/ele
 Hosted by and thanks to [kochd's codes,](https://github.com/kochd/electricsheep-hd-client/master/) are actual electric dreaming sheeps further fulfilled with
 HighDef' graphical participactive works ran by 'electricsheep-hd-client' daemons, synchronized all together to generate new High-Definition electric sheep dreams frames.
 (fitting HD displays standards up to 720p, 1080p, 4k, 8k)
-For a good illustration of electric sheeps, you might look at [this youtube video](https://www.youtube.com/watch?v=KeNORUW4OGs)
+For a good illustration of electric sheeps, you might have a look to [this youtube video](https://www.youtube.com/watch?v=KeNORUW4OGs)
 
-## Road map
-- not established in this fork.
+### Road map
+- not set.
 
-### Getting started
-
-## To run it on [Debian-based](https://github.com/alidruno/electricsheep-hd-client/blob/master/README.md#debian--ubuntu--) distributions
-#  as Ubuntu (which is mostely ran on my side)...
+## Getting started
+### To run it on [Debian-based](https://github.com/alidruno/electricsheep-hd-client/blob/master/README.md#debian--ubuntu--) distributions as Ubuntu (which I mostely run)...
 it is done with this command-lines:
 
 <pre>
@@ -30,7 +28,6 @@ you should try successfully with usual methods and relate-back their experiences
 
 If message  `./daemon.rb:29:in <main>': You will need an api key. Please register at https://sheeps.triple6.org:9999/register (RuntimeError)`  is displayed,
 everything invites you to [register](https://sheeps.triple6.org:9999/register) on this page.
-
 
 ### With Windows,
 Just download and run the [latest release](https://github.com/alidruno/electricsheep-hd-client/releases/latest) installer and follow the registration steps to get your apikey.
@@ -63,7 +60,7 @@ Usage: daemon [OPTIONS]
 
 Once your daemon is rendering frames, you will earn so called credits for every rendered frames. Your daemon will then start to exchange them, harvesting answered electricsheep-hd videos sequences (if  --no-download  option is not set). Downloaded movies are stored in `$BASE_DIR/branches/$CURRENT_BRANCH/movies` directory. Currently you will only get ~5 seconds long sequences allowing the play script to display them immediately.
 
-## Play
+### Play
 Just run
 <pre>
 ./play
@@ -71,10 +68,10 @@ Just run
 
 This should read your accumulated movies from the current season to play them using mpv (https://mpv.io). mpv is also available as apt package and included in the windows installer.
 
-## Setups
+### Setups
 Have a look at the README's in [setups](https://github.com/alidruno/electricsheep-hd-client/tree/master/setups) to find pretty huge and well prepared advanced setups, fitting your client in very easy-going few steps up to the best integration.
 
-## More information can be found on following links
+#### More information can be found on following links
 - [FAQ](https://sheeps.triple6.org/faq)
 - [Wiki](https://github.com/kochd/electricsheep-hd-client/wiki/Season)
 - [Feel free to submit any questions to the honorific source teams](https://github.com/kochd/electricsheep-hd-client/issues/new?labels=question)
