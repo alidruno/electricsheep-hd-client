@@ -35,11 +35,11 @@ OptionParser.new do |opts|
   opts.on("--nr", "--no-render", "Do not render any frames") {|v| @options["no-render"] = true}
   opts.on("--np", "--no-progress", "Hide progress and ETA - This will speed up rendering a bit") {|v| @options["no-progress"] = true}
   opts.on("--nice NICENESS", "Set priority niceness between highest '-20' and lowest '19', default: 19") {|v| @options["nice"] = v}
-  opts.on("--server SERVER", "Control server to connect to") {|v| @options["server"] = v.to_s}
+  opts.on("--server SERVER", "Select server to connect to") {|v| @options["server"] = v.to_s}
 end.parse!
 @options["apikey"] ? APIKEY_SWITCH_USED = true : APIKEY_SWITCH_USED = false
 
-`which flam3-animate` ; raise "Missing flame3-animate. You have to install flam3 first" if $? != 0
+`which flam3-animate` ; raise "Can not start without flame3-animate. You may try to 'apt-get install flam3-utils flam3-palette libflam3 -y' first" if $? != 0
 
 unless Gem.win_platform?
   `which git` ; LOGGER.error "Missing git. Autoupdate wont work. Please install git" if $? != 0
@@ -203,7 +203,7 @@ def request_work(keep_frames: false)
   if @options["gpu"]
     genome_file = "#{@animated_genome_dir}/#{work['sequence']}.flame"
     unless File.exist?(genome_file)
-      LOGGER.info "Downloading #{work['sequence']} ..."
+      LOGGER.info "Downloading your harvest #{w['sequence']} ..."
       download_animated_genome(work['sequence'])
     end
     LOGGER.info "Rendering... #{work['sequence']} Frame #{work['begin']}-#{work['end']}"
@@ -223,7 +223,7 @@ def request_work(keep_frames: false)
     work.each do |w|
       genome_file = "#{@animated_genome_dir}/#{w['sequence']}.flame"
       unless File.exist?(genome_file)
-        LOGGER.info "Downloading #{w['sequence']} ..."
+        LOGGER.info "Downloading your harvest #{w['sequence']} ..."
         download_animated_genome(w['sequence'])
       end
       LOGGER.info "Rendering... #{w['sequence']} Frame #{w['frame']}"
@@ -329,10 +329,10 @@ def download_sequence
   end
   sequences = JSON.parse(response.body)
   wanted = sequences.select{|s| !File.exist?("#{@movie_dir}/#{s}")}.first
-  return "Nothing to download" if wanted.nil?
+  return "Nothing downloadable" if wanted.nil?
 
-  LOGGER.info "Downloading #{wanted}..."
-  @api.get("api/request_sequence?apikey=#{@api.key}&fingerprint=#{@api.pow}&seq=#{wanted}&gpu=#{@options["gpu"]}") do |r|
+LOGGER.info "Downloading your harvest #{wanted}..."
+@api.get("api/request_sequence?apikey=#{@api.key}&fingerprint=#{@api.pow}&seq=#{wanted}&gpu=#{@options["gpu"]}") do |r|
     File.open("#{@movie_dir}/incomplete_#{wanted}", "wb") do |f|
       r.read_body do |chunk|
         f.write(chunk)
@@ -344,7 +344,7 @@ def download_sequence
 end
 
 def cleanup_animated_genomes
-  LOGGER.info "Cleaning up animated genomes..."
+  LOGGER.info "Freeing up previous animated genomes..."
   Dir.entries(@animated_genome_dir).select do |x|
     x.end_with?(".flame") &&
       File.ctime("#{@animated_genome_dir}/" + x) < (Date.today - 5).to_time
@@ -391,7 +391,7 @@ loop do
     end
 
     if @options["no-render"] || (!@options["no-download"] && (rand(1..10) == 1 || $DEBUG))
-      LOGGER.info "Requesting new sequence ..."
+      LOGGER.info "Harvest‽"
       dl = download_sequence
       if dl == "Nothing to download" && @options["no-render"]
         LOGGER.info "Waiting for new sequences"
